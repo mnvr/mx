@@ -73,7 +73,8 @@ import System.Random
 -- Show one element at random from the given prompt chars
 prompt :: [String] -> Int -> IO String
 prompt _ _ = do
-      let symbols = "•◦◎◉⦿"
+      -- This stopped working with unicode symbols after upgrading to macOS 14
+      let symbols = "-!\\/|~"
       r <- randomRIO (0, length symbols - 1)
       return [symbols !! r, '\n']
 :}
