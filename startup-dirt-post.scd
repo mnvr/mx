@@ -13,6 +13,10 @@ var orderedKeysValuesDo = { |dict, orderedKeys, f|
 	dict.keysValuesDo(f);
 };
 
+var shortF = { |v|
+	v.asStringPrecF(if(v < 1, if (v < 0.1, 3, 4), 3)).padRight(6)
+};
+
 var print = { |k, v|
 	var pk, ps, pv, pn;
 	pk = k;
@@ -21,6 +25,7 @@ var print = { |k, v|
 	switch(k,
 		'_id_', { pk = ""; ps = ""; pv = v; pn = '∘' },
 		'orbit', { pk = ""; ps = ""; pv = v; },
+		'cps', { pv = shortF.(v) },
 		'cycle', { var v10 = v % 10;
 			pk = 'cyc'; pv = v10.asStringPrecF(if(v10 < 1, 3, 4)).padRight(5)
 		},
@@ -28,8 +33,8 @@ var print = { |k, v|
 		'delta', { pk = "δ"; pv = v.asStringPrecF(if(v < 1, if (v < 0.1, 3, 4), 3)).padRight(6); },
 		{
 			pv =
-			if(false.and(v.isKindOf(Float)), {
-				v.asStringPrecF(if(v < 1, if (v < 0.1, 3, 4), 3)).padRight(6)
+			if(v.isKindOf(Float), {
+				v.asStringPrecF(if(v < 1, if (v < 0.1, 6, 7), 6))
 			}, {v.asString})
 		}
 	);
