@@ -63,6 +63,14 @@ let setI = streamSetI tidal
 :}
 :set prompt "tidal> "
 
+-- Things that are in the upstream BootTidal (Tidal) but not yet in the
+-- BootTidal file that is used by the vscode extension.
+
+:{
+    let panic = do hush
+                   once $ sound "superpanic"
+:}
+
 -- Extras
 
 :set prompt ".\n"
