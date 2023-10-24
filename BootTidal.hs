@@ -1,11 +1,22 @@
--- Original
+-- This is a mix of
+-- 1. The default BootTidal.hs that comes with the vscode plugin
 -- https://raw.githubusercontent.com/tidalcycles/vscode-tidalcycles/master/src/tidal.ts
+-- 2. And the BootTidal.hs from Tidal's source itself.
+--
+-- At the end, there are our own added customizations.
+
 :set -XOverloadedStrings
 :set prompt ""
 :set prompt-cont ""
+
 import Sound.Tidal.Context
+
+import System.IO (hSetEncoding, stdout, utf8)
+hSetEncoding stdout utf8
+
 -- total latency = oLatency + cFrameTimespan
 tidal <- startTidal (superdirtTarget {oLatency = 0.1, oAddress = "127.0.0.1", oPort = 57120}) (defaultConfig {cFrameTimespan = 1/20})
+
 :{
 let p = streamReplace tidal
     hush = streamHush tidal
